@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const config = require('config');
-const db = config.get('mongoURI');
+const db = config.get('mongoURI');    //get the mongoURI in config file
 
-const connectDB = async () => {
+const connectDB = async () => {       //used to use { mongoose.connect(db) }, the method use here is a new standard
   try {
-    await mongoose.connect(db, {
+    await mongoose.connect(db, {      //mongoose.connect() return a promise
       useNewUrlParser: true
     });
     console.log('MongoDB Connected...');
