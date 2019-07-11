@@ -1,4 +1,5 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState} from 'react';
+import axios from 'axios';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -16,7 +17,19 @@ const Register = () => {
             console.log('Passwords do not match')
           //setAlert('Passwords do not match', 'danger');
         } else {
-            console.log(formData)
+            const newUser = {name, email, password}
+            try{
+                const config = {
+                    headers:{
+                        'Content-Type': 'application/json'
+                    } 
+                }
+                const body = JSON.stringify(newUser);
+                const res = await axios.post('/api/users', body, config);
+                console.log(res.data)
+            }catch(err){
+                console.error(err.response.data);
+            }
           //register({ name, email, password });
         }
     };
