@@ -2,9 +2,10 @@ import React, {Fragment, useState} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {setAlert} from '../../actions/alert';
+import {register} from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Register = ({setAlert}) => {
+const Register = ({setAlert, register}) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -17,9 +18,10 @@ const Register = ({setAlert}) => {
     const onSubmit = async e => {
         e.preventDefault();
         if (password !== password2) {
-            console.log('Passwords do not match')
+            //console.log('Passwords do not match')
             setAlert('Passwords do not match', 'danger');
         } else {
+            /*
             const newUser = {name, email, password}
             try{
                 const config = {
@@ -33,7 +35,8 @@ const Register = ({setAlert}) => {
             }catch(err){
                 console.error(err.response.data);
             }
-          //register({ name, email, password });
+            */
+            register({ name, email, password });
         }
     };
 
@@ -43,7 +46,7 @@ const Register = ({setAlert}) => {
             <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
             <form className="form" onSubmit={e=>onSubmit(e)}>
                 <div className="form-group">
-                    <input type="text" placeholder="Name" name="name" value={name} onChange={e => onChange(e)} required />
+                    <input type="text" placeholder="Name" name="name" value={name} onChange={e => onChange(e)}  />
                 </div>
                 <div className="form-group">
                 <input type="email" placeholder="Email Address" name="email" value={email} onChange={e => onChange(e)}/>
@@ -59,7 +62,7 @@ const Register = ({setAlert}) => {
                     name="password"
                     value={password} 
                     onChange={e => onChange(e)}
-                    minLength="6"
+                    
                 />
                 </div>
                 <div className="form-group">
@@ -69,7 +72,7 @@ const Register = ({setAlert}) => {
                     name="password2"
                     value={password2}
                     onChange={e => onChange(e)}
-                    minLength="6"
+                    
                 />
                 </div>
                 <input type="submit" className="btn btn-primary" value="Register" />
@@ -82,7 +85,8 @@ const Register = ({setAlert}) => {
 }
 
 Register.propTypes = {
-    setAlert: PropTypes.func.isRequired
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired
 }
 
-export default connect(null, {setAlert})(Register);     //connect takes two parameters: 1.state we wanna map; 2.an object with any actions we wanna use
+export default connect(null, {setAlert, register})(Register);     //connect takes two parameters: 1.state we wanna map; 2.an object with any actions we wanna use
