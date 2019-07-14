@@ -1,9 +1,10 @@
-import React, { useEffect, useState, Fragment } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { useState, Fragment } from "react";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { createProfile } from "../../actions/profile";
 
-const Createprofile = props => {
+const Createprofile = ({createProfile, history}) => {
   const [formData, setFormData] = useState({
     company: "",
     website: "",
@@ -18,7 +19,6 @@ const Createprofile = props => {
     youtube: "",
     instagram: "",
   });
-
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
   const {
     company,
@@ -37,13 +37,17 @@ const Createprofile = props => {
 
   const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
 
+  const onSubmit = e => {
+      e.preventDefault();
+      createProfile(formData, history);
+  }
   return (
     <Fragment>
       <h1 className='large text-primary'>Create Your Profile</h1>
       <p className='lead'>
         <i className='fas fa-user' /> Let's get some information to make your profile stand out
       </p>
-      <form className='form'>
+      <form className='form' onSubmit={e=>onSubmit(e)}>
         <div className='form-group'>
           <select name='status' value={status} onChange={e => onChange(e)}>
             <option value='0'>* Select Professional Status</option>
@@ -129,15 +133,10 @@ const Createprofile = props => {
   );
 };
 
-Createprofile.propTypes = {};
-/*
+
+
 Createprofile.propTypes = {
-  createProfile: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
+  createProfile: PropTypes.func.isRequired
 };
-const mapStateToProps = state => ({
-  profile: state.profile,
-});
-*/
-export default Createprofile;
+
+export default connect(null,{createProfile})(withRouter(Createprofile));  //withRouter allows us to use history object
