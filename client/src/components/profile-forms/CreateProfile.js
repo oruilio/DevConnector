@@ -39,7 +39,7 @@ const CreateProfile = ({createProfile, history}) => {
 
   const onSubmit = e => {
       e.preventDefault();
-      createProfile(formData, history, true);
+      createProfile(formData, history);
   }
   return (
     <Fragment>
