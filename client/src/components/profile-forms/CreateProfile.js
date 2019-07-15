@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile } from "../../actions/profile";
 
-const Createprofile = ({createProfile, history}) => {
+const CreateProfile = ({createProfile, history}) => {
   const [formData, setFormData] = useState({
     company: "",
     website: "",
@@ -39,7 +39,7 @@ const Createprofile = ({createProfile, history}) => {
 
   const onSubmit = e => {
       e.preventDefault();
-      createProfile(formData, history);
+      createProfile(formData, history, true);
   }
   return (
     <Fragment>
@@ -133,10 +133,8 @@ const Createprofile = ({createProfile, history}) => {
   );
 };
 
-
-
-Createprofile.propTypes = {
+CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired
 };
 
-export default connect(null,{createProfile})(withRouter(Createprofile));  //withRouter allows us to use history object
+export default connect(null,{createProfile})(withRouter(CreateProfile));  //withRouter allows us to use history object
