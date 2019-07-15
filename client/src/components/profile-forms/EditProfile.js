@@ -40,7 +40,7 @@ const EditProfile = ({profile:{profile,loading}, createProfile, getCurrentProfil
             youtube: loading || !profile.social ? '' : profile.social.youtube,
             instagram: loading || !profile.social ? '' : profile.social.instagram
         });
-    }, [loading]);        //when it loads, we wanna this to run
+    }, [loading, getCurrentProfile]);        //when it loads, we wanna this to run
       
 
     const {
