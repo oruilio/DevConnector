@@ -18,8 +18,8 @@ if (localStorage.token) {
 
 const App = () =>{
   
-  useEffect(() => {       //keep running as a loop
-    store.dispatch(loadUser());
+  useEffect(() => {      
+    store.dispatch(loadUser());   //with [] will only run once when it loaded, otherwise it will keep running
   }, []);
 
   return (
